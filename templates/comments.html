@@ -1,0 +1,40 @@
+{% extends "main_page.html" %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <h2 class="mb-4">Comment Board</h2>
+            
+            <!-- Comment Display -->
+            {% for comment in comments %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <p class="card-text">{{ comment.content }}</p>
+                    <small class="text-muted">
+                        Posted on {{ comment.created_at.strftime('%Y-%m-%d at %H:%M') }}
+                    </small>
+                </div>
+            </div>
+            {% endfor %}
+            
+            <!-- Comment Form -->
+            <div class="card">
+                <div class="card-body">
+                    <form method="POST" action="{{ url_for('comments') }}">
+                        <div class="mb-3">
+                            <textarea class="form-control" name="contents" 
+                                      placeholder="Leave a comment..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Post Comment</button>
+                    </form>
+                </div>
+            </div>
+            
+            <a href="{{ url_for('portfolio') }}" class="btn btn-outline-secondary mt-3">
+                Back to Portfolio
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

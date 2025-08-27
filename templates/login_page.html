@@ -1,0 +1,162 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="color-scheme" content="dark light">
+        <meta name="theme-color" content="#121212">
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+        <style>
+            :root {
+                --bg-dark: #121212;
+                --bg-darker: #1a1a1a;
+                --bg-card: rgba(30, 30, 30, 0.8);
+                --text-light: #e0e0e0;
+                --border-dark: #333;
+                --primary-blue: #3498db;
+                --error-orange: #d35400;
+            }
+
+            body {
+                background-color: var(--bg-dark);
+                color: var(--text-light);
+                line-height: 1.6;
+                padding-top: 20px;
+            }
+
+            .navbar-inverse {
+                background-color: var(--bg-darker) !important;
+                border-color: var(--bg-darker) !important;
+                backdrop-filter: blur(5px);
+            }
+
+            .login-container {
+                max-width: 500px;
+                margin: 40px auto;
+                padding: 30px;
+                background: var(--bg-card);
+                border-radius: 10px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .form-control {
+                background-color: #2d2d2d;
+                color: var(--text-light);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                padding: 12px;
+                height: auto;
+                transition: all 0.3s ease;
+            }
+
+            .form-control:focus {
+                background-color: #333;
+                color: var(--text-light);
+                border-color: var(--primary-blue);
+                box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+            }
+
+            .alert-warning {
+                background-color: rgba(211, 84, 0, 0.2);
+                border: 1px solid var(--error-orange);
+                color: #ff9f43;
+                backdrop-filter: blur(3px);
+            }
+
+            .btn-success {
+                background-color: #27ae60;
+                border-color: #2ecc71;
+                padding: 10px 20px;
+                font-size: 16px;
+                transition: all 0.3s ease;
+                width: 100%;
+                margin-top: 10px;
+            }
+
+            .btn-success:hover {
+                background-color: #2ecc71;
+                transform: translateY(-2px);
+            }
+
+            label {
+                font-weight: 400;
+                margin-bottom: 8px;
+                display: block;
+                color: #bdc3c7;
+            }
+
+            .navbar-brand {
+                font-weight: 500;
+                letter-spacing: 0.5px;
+            }
+
+            .login-title {
+                text-align: center;
+                margin-bottom: 30px;
+                font-weight: 300;
+                position: relative;
+            }
+
+            .login-title:after {
+                content: '';
+                position: absolute;
+                bottom: -10px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 80px;
+                height: 2px;
+                background: var(--primary-blue);
+            }
+        </style>
+
+        <title>Login | Fatin's Portfolio</title>
+    </head>
+
+    <body>
+        <nav class="navbar navbar-inverse">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="{{ url_for('portfolio') }}">Fatin's Portfolio</a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container">
+            <div class="login-container">
+                <h2 class="login-title">Login to Scratchpad</h2>
+
+                {% if error %}
+                    <div class="alert alert-warning" role="alert">
+                        <i class="fas fa-exclamation-triangle"></i> Incorrect username or password
+                    </div>
+                {% endif %}
+
+               <form action="{{ url_for('login') }}" method="POST">
+                    <div class="form-group">
+                    <label for="username">Username</label>
+                    <input class="form-control" id="username" name="username" required>
+            </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+            </div>
+        </div>
+
+
+        <!-- Bootstrap JS and dependencies -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    </body>
+</html>

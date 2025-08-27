@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="color-scheme" content="dark light">
+        <meta name="theme-color" content="#121212">
+        <title>My Portfolio</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+        <style>
+            :root {
+                --bg-dark: #121212;
+                --bg-darker: #1a1a1a;
+                --bg-card: #1e1e1e;
+                --text-light: #e0e0e0;
+                --border-dark: #333;
+                --primary-blue: #3498db;
+                --section-spacing: 80px;
+            }
+
+            body {
+                background-color: var(--bg-dark);
+                color: var(--text-light);
+                line-height: 1.6;
+                font-family: 'Poppins', sans-serif;
+            }
+
+            .navbar-inverse {
+                background-color: rgba(26, 26, 26, 0.9) !important;
+                border: none !important;
+                backdrop-filter: blur(5px);
+            }
+
+            #hero {
+                background: linear-gradient(-45deg, #1a3a5a, #0d1a26, #1a3a5a, #0d1a26);
+                background-size: 400% 400%;
+                animation: gradient 15s ease infinite;
+                color: white;
+                padding: var(--section-spacing) 0;
+                margin-bottom: var(--section-spacing);
+            }
+
+            @keyframes gradient {
+                0% { background-position: 0% 50%; }
+                50% { background-position: 100% 50%; }
+                100% { background-position: 0% 50%; }
+            }
+
+            section {
+                padding: var(--section-spacing) 0;
+                position: relative;
+            }
+
+            section:after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 5%;
+                right: 5%;
+                height: 1px;
+                background: linear-gradient(90deg, transparent, rgba(52, 152, 219, 0.3), transparent);
+            }
+
+            section:last-child:after {
+                display: none;
+            }
+
+            .comment-card {
+                margin-bottom: 20px;
+                padding: 20px;
+                background: rgba(30, 30, 30, 0.7);
+                border-radius: 8px;
+                border-left: 4px solid var(--primary-blue);
+                backdrop-filter: blur(3px);
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+
+            .comment-card:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            }
+
+            .comment-meta {
+                display: flex;
+                align-items: center;
+                margin-top: 10px;
+            }
+
+            .comment-author {
+                display: inline-flex;
+                align-items: center;
+                margin-right: 15px;
+            }
+
+            .comment-author i {
+                margin-right: 5px;
+                color: var(--primary-blue);
+            }
+
+            .panel {
+                background: transparent;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 8px;
+            }
+
+            .panel-heading {
+                background: rgba(26, 26, 26, 0.5) !important;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 8px 8px 0 0 !important;
+            }
+
+            .form-control {
+                background: rgba(30, 30, 30, 0.8);
+                color: var(--text-light);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                padding: 12px;
+            }
+
+            .form-control:focus {
+                background: rgba(30, 30, 30, 0.9);
+                color: var(--text-light);
+                border-color: var(--primary-blue);
+                box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+            }
+
+            .btn-default {
+                background: rgba(30, 30, 30, 0.8);
+                color: var(--text-light);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                transition: all 0.3s ease;
+            }
+
+            .btn-default:hover {
+                background: rgba(40, 40, 40, 0.9);
+                border-color: rgba(255, 255, 255, 0.3);
+            }
+
+            .text-muted {
+                color: #aaaaaa !important;
+                opacity: 0.8;
+            }
+
+            h1, h2, h3, h4 {
+                font-weight: 600;
+                letter-spacing: 0.5px;
+            }
+
+            h2 {
+                margin-bottom: 40px;
+                position: relative;
+                display: inline-block;
+            }
+
+            h2:after {
+                content: '';
+                position: absolute;
+                bottom: -10px;
+                left: 0;
+                width: 50px;
+                height: 2px;
+                background: var(--primary-blue);
+            }
+
+            footer {
+                padding: 30px 0;
+                background: rgba(26, 26, 26, 0.8);
+                margin-top: var(--section-spacing);
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            a {
+                color: var(--primary-blue);
+                transition: color 0.3s ease;
+            }
+
+            a:hover {
+                color: #5dade2;
+                text-decoration: none;
+            }
+
+            .lead {
+                font-weight: 300;
+                font-size: 1.25rem;
+                opacity: 0.9;
+                margin-bottom: 30px;
+            }
+            
+            /* New LinkedIn Button Styles */
+            .btn-linkedin {
+                background-color: #0077B5;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 4px;
+                font-size: 1rem;
+                transition: all 0.3s ease;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .btn-linkedin:hover {
+                background-color: #006097;
+                color: white;
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            }
+            
+            .btn-linkedin i {
+                margin-right: 8px;
+                font-size: 1.2rem;
+            }
+
+            .progress {
+                height: 8px;
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 4px;
+                margin-bottom: 20px;
+            }
+
+            .progress-bar {
+                background-color: var(--primary-blue);
+            }
+
+            .timeline-item {
+                position: relative;
+                padding-left: 30px;
+                margin-bottom: 30px;
+            }
+
+            .timeline-item:before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 5px;
+                width: 15px;
+                height: 15px;
+                border-radius: 50%;
+                background: var(--primary-blue);
+            }
+
+            .timeline-item:after {
+                content: '';
+                position: absolute;
+                left: 7px;
+                top: 20px;
+                bottom: -30px;
+                width: 1px;
+                background: rgba(255, 255, 255, 0.2);
+            }
+
+            .timeline-item:last-child:after {
+                display: none;
+            }
+
+            .fab {
+                position: fixed;
+                bottom: 30px;
+                right: 30px;
+                background: var(--primary-blue);
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                text-align: center;
+                line-height: 60px;
+                color: white;
+                font-size: 20px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+                z-index: 1000;
+                transition: all 0.3s ease;
+            }
+
+            .fab:hover {
+                transform: scale(1.1);
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Navigation -->
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#home">Portfolio</a>
+                </div>
+                <div class="collapse navbar-collapse" id="navbar">
+                    <ul class="nav navbar-nav">
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#skills">Skills</a></li>
+                        <li><a href="#experience">Experience</a></li>
+                        <li><a href="#certifications">Certifications</a></li>
+                        <li><a href="{{ url_for('scratchpad') }}">Scratchpad</a></li>
+                        <li><a href="#comments">Comments</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        {% if current_user.is_authenticated %}
+                            <li><a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                        {% else %}
+                            <li><a href="{{ url_for('login') }}"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Home Section -->
+        <section id="home" class="page-section">
+            <div class="container text-center">
+                <h1>Fatin Nur Syazwani</h1>
+                <p class="lead">Cloud Support DevOps Trainee</p>
+                 <a href="https://www.linkedin.com/in/fatin-nur-syazwani-zahurin-9a38aa1a1" class="btn btn-linkedin" target="_blank">
+                    <i class="fa-brands fa-linkedin"></i> Connect on LinkedIn
+                </a>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="page-section">
+            <div class="container">
+                <h2>About Me</h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>Hello! I'm a Cloud Support and DevOps trainee in Generations Singapore. Interest in pursuing any Cybersecurity related.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fas fa-graduation-cap"></i> Education</h3>
+                            </div>
+                            <div class="panel-body">
+                                Bachelor of Science (Hons) in Forensic Computing [University of Portsmouth]
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills">
+            <div class="container">
+                <h2>Skills</h2>
+                <div class="skill-item">
+                    <h4><i class="fa-brands fa-linux"></i> Linux</h4>
+                    <div class="progress">
+                        <div class="progress-bar" style="width: 65%"></div>
+                    </div>
+                    <h4><i class="fa-brands fa-python"></i> Python</h4>
+                    <div class="progress">
+                        <div class="progress-bar" style="width: 65%"></div>
+                    </div>
+                    <h4><i class="fa-brands fa-html5"></i> HTML5</h4>
+                    <div class="progress">
+                        <div class="progress-bar" style="width: 60%"></div>
+                    </div>
+                    <h4><i class="fas fa-code"></i> Bash Scripting</h4>
+                    <div class="progress">
+                        <div class="progress-bar" style="width: 70%"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience">
+            <div class="container">
+                <h2>Experience</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h3>Cloud Support Trainee</h3>
+                        <p>Generations Singapore | 2024-Present</p>
+                        <ul>
+                            <li>Completed a 12-week full-time training program; Cloud Support and DevOps track (A Cloud Guru - the main 
+interactive self-directed learning platform)
+</li>
+                            <li>Acquired foundational skills in IT fundamentals, including Linux, Python, Azure, Docker, Ansible, and
+Terraform, with hands-on experience in infrastructure automation and CI/CD pipeline creation
+</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-item">
+                        <h3>Career Gap</h3>
+                        <p>N/A | NOV 2022 – JUN 2025</p>
+                        <ul>
+                            <li>Health Recovery (Post Transplant treatment)</li>
+                            <li>Took up Cybersecurity bootcamp in 2024.</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-item">
+                        <h3>Desktop Engineer</h3>
+                        <p>NCS | Jun 2022 – Nov 2022</p>
+                        <ul>
+                            <li>Provided end-user support for 300+ Windows/macOS devices using Active Directory, SCCM, and ServiceNow, resolving hardware/software issues while developing transferable skills in system administration, troubleshooting, and PowerShell scripting</li>
+                            <li>Provided end-user support, troubleshooting hardware/software issues, managing service requests, and ensuring timely incident resolution while maintaining system documentation and reporting.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications Section -->
+        <section id="certifications">
+            <div class="container">
+                <h2>Certifications</h2>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fas fa-certificate"></i> Microsoft Azure</h3>
+                            </div>
+                            <div class="panel-body">
+                                AZ-900 (In Progress)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comment Section -->
+        <section id="comments">
+            <div class="container">
+                <h2 class="text-center">Comment Board</h2>
+
+                {% for comment in comments %}
+                <div class="comment-card">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p>{{ comment.content }}</p>
+                            <div class="comment-meta">
+                                {% if comment.posted %}
+                                    <div class="comment-author">
+                                        <i class="fas fa-user"></i>
+                                        {% if comment.commenter %}
+                                            {{ comment.commenter.username }}
+                                        {% else %}
+                                            Anonymous
+                                        {% endif %}
+                                    </div>
+                                    <small class="text-muted">
+                                        <i class="far fa-clock"></i> {{ comment.posted.strftime('%Y-%m-%d at %H:%M') }}
+                                    </small>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+                {% if current_user.is_authenticated %}
+                <div class="row" style="margin-top: 30px;">
+                    <form action="{{ url_for('add_comment') }}" method="POST">
+                        <div class="form-group">
+                            <textarea class="form-control" name="contents" placeholder="Enter your comment here..." rows="3" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-paper-plane"></i> Post Comment
+                        </button>
+                    </form>
+                </div>
+                {% else %}
+                <div class="alert alert-info">
+                    Please <a href="{{ url_for('login') }}" class="alert-link">login</a> to post comments.
+                </div>
+                {% endif %}
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="text-center">
+            <div class="container">
+                <div class="social-links" style="margin-bottom: 20px;">
+                    <a href="#" style="margin: 0 10px; font-size: 20px;"><i class="fab fa-github"></i></a>
+                    <a href="#" style="margin: 0 10px; font-size: 20px;"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" style="margin: 0 10px; font-size: 20px;"><i class="fas fa-envelope"></i></a>
+                </div>
+                <p>&copy; 2025 My Portfolio. All rights reserved.</p>
+            </div>
+        </footer>
+
+        <!-- Floating Action Button -->
+        <a href="#comments" class="fab">
+            <i class="fas fa-comment-dots"></i>
+        </a>
+
+        <!-- JavaScript -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <script>
+        // Smooth scrolling and active nav highlighting
+        $(document).ready(function(){
+            // Smooth scrolling
+            $('a[href*="#"]').not('[href="#"]').on('click', function(e) {
+                if (this.pathname === window.location.pathname) {
+                    e.preventDefault();
+                    $('html, body').animate({
+                        scrollTop: $($(this).attr('href')).offset().top - 70
+                    }, 500);
+                }
+            });
+
+            // Active nav highlighting
+            $(window).scroll(function() {
+                var scrollPos = $(document).scrollTop() + 100;
+                $('nav a').each(function() {
+                    var currLink = $(this);
+                    var refElement = $(currLink.attr("href"));
+                    if (refElement.position() &&
+                        refElement.position().top <= scrollPos &&
+                        refElement.position().top + refElement.height() > scrollPos) {
+                        $('nav li').removeClass("active");
+                        currLink.parent().addClass("active");
+                    }
+                });
+            }).scroll();
+        });
+        </script>
+    </body>
+</html>

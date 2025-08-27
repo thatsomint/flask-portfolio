@@ -1,0 +1,169 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="color-scheme" content="dark light">
+        <meta name="theme-color" content="#121212">
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        
+        <style>
+            :root {
+                --bg-dark: #121212;
+                --bg-darker: #1a1a1a;
+                --bg-card: rgba(30, 30, 30, 0.7);
+                --text-light: #e0e0e0;
+                --border-dark: #333;
+                --primary-blue: #3498db;
+            }
+
+            body {
+                background-color: var(--bg-dark);
+                color: var(--text-light);
+                line-height: 1.6;
+            }
+
+            .navbar-inverse {
+                background-color: var(--bg-darker) !important;
+                border-color: var(--bg-darker) !important;
+            }
+
+            .container {
+                background-color: transparent;
+                padding: 20px 0;
+            }
+
+            .comment-container {
+                margin-bottom: 15px;
+                padding: 15px;
+                background: var(--bg-card);
+                border-radius: 8px;
+                border-left: 4px solid var(--primary-blue);
+                backdrop-filter: blur(3px);
+                transition: all 0.3s ease;
+            }
+
+            .comment-container:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            }
+
+            .form-control {
+                background-color: #2d2d2d;
+                color: var(--text-light);
+                border-color: #444;
+            }
+
+            .form-control:focus {
+                background-color: #333;
+                color: var(--text-light);
+                border-color: var(--primary-blue);
+                box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+            }
+
+            .alert-info {
+                background-color: #1a3a5a;
+                border-color: #2a4a6a;
+                color: var(--text-light);
+            }
+
+            .btn-success {
+                background-color: #27ae60;
+                border-color: #2ecc71;
+            }
+
+            .text-muted {
+                color: #aaaaaa !important;
+            }
+
+            a {
+                color: var(--primary-blue);
+                transition: color 0.2s ease;
+            }
+
+            a:hover {
+                color: #5dade2;
+                text-decoration: none;
+            }
+
+            .navbar-brand {
+                font-weight: 500;
+                letter-spacing: 0.5px;
+            }
+
+            .navbar-nav > li > a {
+                transition: all 0.2s ease;
+            }
+
+            .navbar-nav > li > a:hover {
+                background-color: rgba(255, 255, 255, 0.05) !important;
+            }
+        </style>
+        
+        <title>Fatin's Portfolio</title>
+    </head>
+
+    <body>
+        <nav class="navbar navbar-inverse">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Fatin's Portfolio</a>
+                </div>
+                <div id="navbar" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="{{ url_for('portfolio') }}">Back to Portfolio</a></li>
+                        {% if current_user.is_authenticated %}
+                            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                        {% else %}
+                            <li><a href="{{ url_for('login') }}">Login</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container">
+            {% for comment in comments %}
+                <div class="comment-container">
+                    <div>{{ comment.content }}</div>
+                    <small class="text-muted">
+                        <i class="far fa-clock"></i> Posted on {{ comment.posted.strftime('%Y-%m-%d at %H:%M') }}
+                        by
+                        {% if comment.commenter %}
+                            {{ comment.commenter.username }}
+                        {% else %}
+                            anonymous
+                        {% endif %}
+                    </small>
+                </div>
+            {% endfor %}
+
+            {% if current_user.is_authenticated %}
+                <div class="row" style="margin-top: 30px;">
+                    <form action="{{ url_for('add_comment') }}" method="POST">
+                        <textarea class="form-control" name="contents" placeholder="Enter a comment" required rows="4"></textarea>
+                        <button type="submit" class="btn btn-success" style="margin-top: 15px;">
+                            <i class="fas fa-paper-plane"></i> Post Comment
+                        </button>
+                    </form>
+                </div>
+            {% else %}
+                <div class="alert alert-info" style="margin-top: 30px;">
+                    Please <a href="{{ url_for('login') }}" class="alert-link">login</a> to post comments.
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Bootstrap JS and dependencies -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    </body>
+</html>
