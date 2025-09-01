@@ -58,15 +58,14 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_0F4200FF096C4699AC915F3AA8A1F498 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_01C2755615034E4F87EC1B0CF632DDB2 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_FB44C51A7A0B41D8AC7CCE1A043183F4 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_9CEEFBB1F01745229AE7C42D990014D7 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_A9316669C3FE4092834284FC44E0DF73 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_082ABA26EA044457BE737E8AE24C944B }}
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
         with:
           app-name: 'fatin-flask-portfolio'
-          # slot-name: 'Production'
-
+          slot-name: 'Production'
           
