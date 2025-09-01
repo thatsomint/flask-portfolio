@@ -22,6 +22,8 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)  # Now this will work
 
+
+
 # Flask-Login setup
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -53,19 +55,18 @@ class Comment(db.Model):
     commenter = db.relationship('User', foreign_keys=commenter_id)
 
 @login_manager.user_loader
-@login_manager.user_loader
 def load_user(user_id):
     # Changed to only use username since get_id() returns username
     return User.query.filter_by(username=user_id).first()
 
-def init_db():
-    with app.app_context():
-        db.create_all()
-        if not User.query.first():
-            admin = User(username="admin")
-            admin.set_password("secret")
-            db.session.add(admin)
-            db.session.commit()
+# Automatically create tables when the app starts
+with app.app_context():
+    db.create_all()
+    if not User.query.first():
+        admin = User(username="admin")
+        admin.set_password("secret")
+        db.session.add(admin)
+        db.session.commit()
 
 @app.route('/')
 def home():
@@ -136,6 +137,6 @@ def logout():
 
 
 if __name__ == "__main__":
-    with app.app_context():
-        init_db()
+    #with app.app_context():
+        #init_db()
     app.run()
