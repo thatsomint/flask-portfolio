@@ -16,10 +16,8 @@ app.config['REMEMBER_COOKIE_SECURE'] = True
 app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
 
 # Database configuration
-SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://fatinsyazwani:thatsomint@fatinsyazwani.mysql.pythonanywhere-services.com/fatinsyazwani$comments"
-app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URI
-app.config['SQLALCHEMY_POOL_RECYCLE'] = 299
-app.config['SQLALCHEMY_POOL_TIMEOUT'] = 20  # Added this
+basedir = os.path.abspath(os.path.dirname(__file__))
+app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///' + os.path.join(basedir, 'app.db')
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)  # Now this will work
